@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import "tailwindcss";
+
+/* ── Theme tokens ────────────────────────── */
+
+@theme {
+  --color-bg: #DED2CA;
+  --color-surface: #F8F6F3;
+  --color-secondary: #F1ECE7;
+  --color-text: #171717;
+  --color-text-secondary: #5F5A56;
+  --color-border: #D5CDC6;
+  --color-accent: #687A63;
+  --color-accent-dark: #4F6149;
+  --color-accent-light: #8FA689;
+
+  --font-sans: 'DM Sans', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ─────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Text size ────────────────────────────── */
+
+html.text-size-normal {
+  font-size: 16px;
+}
+html.text-size-large {
+  font-size: 18px;
+}
+html.text-size-x-large {
+  font-size: 20px;
+}
+
+/* ── Reduced motion ───────────────────────── */
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ── High contrast ────────────────────────── */
+
+html.high-contrast {
+  --color-bg: #F5F0EB;
+  --color-surface: #FFFFFF;
+  --color-secondary: #F0EBE5;
+  --color-text: #000000;
+  --color-text-secondary: #333333;
+  --color-border: #999999;
+  --color-accent: #2D5A27;
+}
+
+/* ── Focus ────────────────────────────────── */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar ────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ── Selection ────────────────────────────── */
+
+::selection {
+  background-color: var(--color-accent-light);
+  color: white;
+}
+
+/* ── Loading dots animation ──────────────── */
+
+@keyframes loading-dots {
+  0%, 20% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.loading-dot {
+  animation: loading-dots 1.4s infinite;
+}
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ── Pulse ring for voice ────────────────── */
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s ease-in-out infinite;
+}
