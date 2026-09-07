@@ -30,7 +30,12 @@ class DocumentChunk(Base):
         nullable=False,
     )
 
-    page_number: Mapped[int | None] = mapped_column(
+    page_start: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True,
+    )
+
+    page_end: Mapped[int | None] = mapped_column(
         Integer,
         nullable=True,
     )
