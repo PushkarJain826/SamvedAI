@@ -28,7 +28,6 @@ def create_document(
     )
 
     db.add(document)
-    db.commit()
-    db.refresh(document)
+    db.flush()
 
     return document

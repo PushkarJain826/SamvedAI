@@ -10,23 +10,54 @@ def page_to_blocks(page: dict) -> list[dict]:
     text = page["text"]
     page_number = page["page_number"]
 
-    paragraphs = re.split(r"\n\s*\n", text)
+    lines = text.splitlines()
 
     blocks = []
+    current_lines = []
 
-    for paragraph in paragraphs:
-        paragraph = paragraph.strip()
+    def save_current_block():
+        if not current_lines:
+            return
 
-        if not paragraph:
+        block_text = " ".join(
+            line.strip()
+            for line in current_lines
+            if line.strip()
+        )
+
+        if block_text:
+            blocks.append({
+                "text": block_text,
+                "page": page_number,
+            })
+
+        current_lines.clear()
+
+    for line in lines:
+        line = line.strip()
+
+        # Blank line means the current paragraph has ended.
+        if not line:
+            save_current_block()
             continue
 
-        # Join PDF line wrapping
-        paragraph = re.sub(r"\s*\n\s*", " ", paragraph)
+        heading_type, heading = parse_heading(line)
+        major_heading = parse_major_heading(line)
 
-        blocks.append({
-            "text": paragraph,
-            "page": page_number,
-        })
+        # Keep genuine headings as separate blocks.
+        if heading_type is not None or major_heading is not None:
+            save_current_block()
+
+            blocks.append({
+                "text": line,
+                "page": page_number,
+            })
+
+            continue
+
+        current_lines.append(line)
+
+    save_current_block()
 
     return blocks
 
@@ -38,6 +69,21 @@ def pages_to_blocks(pages: list[dict]) -> list[dict]:
         blocks.extend(page_to_blocks(page))
 
     return blocks
+
+
+def parse_major_heading(text: str) -> str | None:
+    text = text.strip()
+
+    major_headings = [
+        "Weather Based Crop Insurance Scheme (WBCIS):-",
+        "Unified Package Insurance Scheme (UPIS)",
+    ]
+
+    for heading in major_headings:
+        if text.lower() == heading.lower():
+            return heading
+
+    return None
 
 
 def parse_heading(text: str) -> tuple[str | None, str | None]:
@@ -159,6 +205,22 @@ def create_chunks(
         page = block["page"]
 
         heading_type, heading = parse_heading(text)
+        major_heading = parse_major_heading(text)
+
+        # -----------------------------------
+        # New major heading
+        # -----------------------------------
+
+        if major_heading is not None:
+            save_current_chunk()
+
+            current_blocks.clear()
+            current_pages.clear()
+
+            current_section = major_heading
+            current_subsection = None
+
+            continue
 
         # -----------------------------------
         # New section
@@ -259,9 +321,10 @@ if __name__ == "__main__":
 
     print("Total chunks:", len(chunks))
 
-    for chunk in chunks[:10]:
+    for chunk in chunks:
         print("\n" + "=" * 80)
         print("CHUNK:", chunk["chunk_index"])
         print("PAGES:", chunk["page_start"], "-", chunk["page_end"])
         print("SECTION:", chunk["section"])
+        print("SUBSECTION:", chunk["subsection"])
         print(chunk["chunk_text"])

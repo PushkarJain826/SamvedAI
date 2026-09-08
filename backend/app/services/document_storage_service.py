@@ -20,5 +20,3 @@ def save_chunks(
         )
 
         db.add(document_chunk)
-
-    db.commit()

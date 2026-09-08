@@ -51,6 +51,8 @@ def ingest_document(
             chunks=chunks,
         )
 
+        db.commit()
+
         print("Document ID:", document.id)
         print("Chunks stored:", len(chunks))
 
@@ -65,7 +67,7 @@ def ingest_document(
 if __name__ == "__main__":
     ingest_document(
         pdf_path="data/pmfby.pdf",
-        title="Pradhan Mantri Fasal Bima Yojana",
+        title="PMFBY and Related Agricultural Insurance Schemes",
         authority_id=1,
         language_id=1,
         document_type_id=1,
