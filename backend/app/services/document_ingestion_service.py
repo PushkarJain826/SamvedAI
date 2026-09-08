@@ -36,7 +36,10 @@ def ingest_document(
 
         # Create chunks
         blocks = pages_to_blocks(pages)
-        chunks = create_chunks(blocks)
+        chunks = create_chunks(
+            blocks,
+            scheme="PMFBY",
+        )
 
         # Generate embeddings
         for chunk in chunks:

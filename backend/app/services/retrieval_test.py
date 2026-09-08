@@ -6,7 +6,7 @@ from app.services.reranker_service import rerank_chunks
 db = SessionLocal()
 
 try:
-    question = "What is the unit of insurance under PMFBY?"
+    question = "What crops are covered under PMFBY?"
 
     results = retrieve_chunks(
         db=db,

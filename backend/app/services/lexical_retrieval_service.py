@@ -14,9 +14,38 @@ def retrieve_lexical_chunks(
         DocumentChunk.chunk_text,
     )
 
-    search_query = func.plainto_tsquery(
+    stopwords = {
+        "what",
+        "is",
+        "are",
+        "the",
+        "a",
+        "an",
+        "of",
+        "under",
+        "in",
+        "on",
+        "for",
+        "to",
+        "and",
+        "or",
+        "how",
+        "which",
+        "can",
+        "does",
+    }
+
+    words = question.split()
+
+    keywords = " OR ".join(
+        word
+        for word in words
+        if word.lower() not in stopwords
+    )
+
+    search_query = func.websearch_to_tsquery(
         "simple",
-        question,
+        keywords,
     )
 
     rank = func.ts_rank_cd(
@@ -26,7 +55,9 @@ def retrieve_lexical_chunks(
 
     statement = (
         select(DocumentChunk, rank.label("rank"))
-        .where(rank > 0)
+        .where(
+            search_vector.op("@@")(search_query)
+        )
         .order_by(rank.desc())
         .limit(limit)
     )

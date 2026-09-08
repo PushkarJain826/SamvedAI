@@ -1,17 +1,23 @@
 from sentence_transformers import CrossEncoder
 
+
 model = CrossEncoder("BAAI/bge-reranker-v2-m3")
 
-question = "What crops are covered under PMFBY?"
+
+question = "What is the unit of insurance under PMFBY?"
 
 correct_chunk = """
-Section 6. CROPS AND NOTIFIED AREA
+Scheme: PMFBY
+Section: 5. UNIT OF INSURANCE
 
-6.1. CROPS: The Scheme can cover all the Crops for which past yield data is available and grown during the notified season, in a Notified Area and for which yield estimation at the Notified Area level will be available.
+The Scheme shall be implemented on an ‘Area Approach basis’ i.e., Defined Areas for each notified crop for widespread calamities with the assumption that all the insured farmers, in a Unit of Insurance, to be defined as ‘Notified Area’ for a crop, face similar risk exposures.
+
+Defined Area (i.e., unit area of insurance) is Village/Village Panchayat level by whatsoever name these areas may be called for major crops and for other crops it may be a unit of size above the level of Village/Village Panchayat.
 """
 
 premium_chunk = """
-Section 10. PREMIUM RATES
+Scheme: PMFBY
+Section: 10. PREMIUM RATES
 
 The rate of Insurance Charges payable by the farmer will be as per the following table.
 
@@ -22,10 +28,12 @@ Rabi Food & Oilseeds crops (all cereals, millets, & oilseeds, pulses) 1.5% of SI
 Kharif & Rabi Annual Commercial / Annual Horticultural crops 5% of SI or Actuarial rate, whichever is less.
 """
 
+
 scores = model.predict([
     (question, correct_chunk),
     (question, premium_chunk),
 ])
+
 
 print("Correct chunk:", scores[0])
 print("Premium chunk:", scores[1])

@@ -138,11 +138,14 @@ def parse_heading(text: str) -> tuple[str | None, str | None]:
 
 
 def build_context(
+    scheme: str | None,
     section: str | None,
     subsection: str | None,
 ) -> str:
-
     parts = []
+
+    if scheme:
+        parts.append(f"Scheme: {scheme}")
 
     if section:
         parts.append(f"Section: {section}")
@@ -155,6 +158,7 @@ def build_context(
 
 def create_chunks(
     blocks: list[dict],
+    scheme: str = "PMFBY",
     max_characters: int = 2500,
 ) -> list[dict]:
 
@@ -163,6 +167,7 @@ def create_chunks(
     current_blocks = []
     current_pages = []
 
+    current_scheme = scheme
     current_section = None
     current_subsection = None
 
@@ -175,6 +180,7 @@ def create_chunks(
             return
 
         context = build_context(
+            current_scheme,
             current_section,
             current_subsection,
         )
@@ -207,29 +213,27 @@ def create_chunks(
         heading_type, heading = parse_heading(text)
         major_heading = parse_major_heading(text)
 
-        # -----------------------------------
         # New major heading
-        # -----------------------------------
-
         if major_heading is not None:
             save_current_chunk()
 
             current_blocks.clear()
             current_pages.clear()
 
+            if "WBCIS" in major_heading:
+                current_scheme = "WBCIS"
+            elif "UPIS" in major_heading:
+                current_scheme = "UPIS"
+
             current_section = major_heading
             current_subsection = None
 
             continue
 
-        # -----------------------------------
         # New section
-        # -----------------------------------
-
         if heading_type == "section":
 
-            # Save everything belonging to the
-            # previous section first.
+            # Save everything belonging to the previous section first.
             save_current_chunk()
 
             current_blocks.clear()
@@ -240,14 +244,10 @@ def create_chunks(
 
             continue
 
-        # -----------------------------------
         # New subsection
-        # -----------------------------------
-
         if heading_type == "subsection":
 
-            # Save previous content before changing
-            # subsection context.
+            # Save previous content before changing subsection context.
             save_current_chunk()
 
             current_blocks.clear()
@@ -257,11 +257,9 @@ def create_chunks(
 
             continue
 
-        # -----------------------------------
         # Normal content
-        # -----------------------------------
-
         context = build_context(
+            current_scheme,
             current_section,
             current_subsection,
         )
@@ -317,7 +315,10 @@ if __name__ == "__main__":
 
     blocks = pages_to_blocks(pages)
 
-    chunks = create_chunks(blocks)
+    chunks = create_chunks(
+        blocks,
+        scheme="PMFBY",
+    )
 
     print("Total chunks:", len(chunks))
 
