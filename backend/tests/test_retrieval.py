@@ -1,5 +1,6 @@
 from app.db.database import SessionLocal
-from app.services.hybrid_retrieval_service import retrieve_hybrid_chunks
+from app.services.retrieval.semantic import retrieve_chunks
+from app.services.retrieval.reranker import rerank_chunks
 
 
 db = SessionLocal()
@@ -7,22 +8,24 @@ db = SessionLocal()
 try:
     question = "What crops are covered under PMFBY?"
 
-    results = retrieve_hybrid_chunks(
+    results = retrieve_chunks(
         db=db,
         question=question,
         limit=15,
-        rerank_limit=5,
     )
 
-    print("Results found:", len(results))
+    reranked_results = rerank_chunks(
+        question=question,
+        results=results,
+        limit=5,
+    )
 
-    for chunk, score in results:
+    for chunk, score in reranked_results:
         print("=" * 80)
         print("Chunk:", chunk.chunk_index)
         print("Reranker score:", score)
         print("Pages:", chunk.page_start, "-", chunk.page_end)
         print("Section:", chunk.section)
-        print("Scheme:", chunk.chunk_text.splitlines()[0])
         print(chunk.chunk_text)
 
 finally:

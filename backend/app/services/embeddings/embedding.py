@@ -1,7 +1,10 @@
 from sentence_transformers import SentenceTransformer
 
 
-model = SentenceTransformer("BAAI/bge-m3",device = "cuda")
+model = SentenceTransformer(
+    "BAAI/bge-m3",
+    device="cuda",
+)
 
 
 def generate_embedding(text: str) -> list[float]:

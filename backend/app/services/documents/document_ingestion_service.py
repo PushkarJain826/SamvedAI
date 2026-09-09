@@ -1,10 +1,10 @@
 from app.db.database import SessionLocal
-from app.services.pdf_service import extract_pdf_pages
-from app.services.text_cleaner import clean_pages
-from app.services.chunker import pages_to_blocks, create_chunks
-from app.services.embedding_service import generate_embedding
-from app.services.document_storage_service import save_chunks
-from app.services.document_service import create_document
+from app.services.ingestion.pdf import extract_pdf_pages
+from app.services.ingestion.text_cleaner import clean_pages
+from app.services.ingestion.chunker import pages_to_blocks, create_chunks
+from app.services.embeddings.embedding import generate_embedding
+from app.services.documents.document_storage_service import save_chunks
+from app.services.documents.document_service import create_document
 
 
 def ingest_document(

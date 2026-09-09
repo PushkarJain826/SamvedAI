@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from app.services.retrieval_service import retrieve_chunks
-from app.services.lexical_retrieval_service import retrieve_lexical_chunks
-from app.services.reranker_service import rerank_chunks
+from app.services.retrieval.semantic import retrieve_chunks
+from app.services.retrieval.lexical import retrieve_lexical_chunks
+from app.services.retrieval.reranker import rerank_chunks
 
 
 def retrieve_hybrid_chunks(

@@ -1,8 +1,4 @@
-from sqlalchemy import select
 from sqlalchemy.orm import Session
-
-from app.models.document_chunk import DocumentChunk
-from app.services.embedding_service import generate_embedding
 
 
 def retrieve_chunks(
@@ -30,7 +26,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.document_chunk import DocumentChunk
-from app.services.embedding_service import generate_embedding
+from app.services.embeddings.embedding import generate_embedding
 
 
 def retrieve_chunks(

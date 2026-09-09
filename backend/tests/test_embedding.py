@@ -1,7 +1,7 @@
-from app.services.pdf_service import extract_pdf_pages
-from app.services.text_cleaner import clean_pages
-from app.services.chunker import pages_to_blocks, create_chunks
-from app.services.embedding_service import generate_embedding
+from app.services.ingestion.pdf import extract_pdf_pages
+from app.services.ingestion.text_cleaner import clean_pages
+from app.services.ingestion.chunker import pages_to_blocks, create_chunks
+from app.services.embeddings.embedding import generate_embedding
 
 
 pdf_path = "data/pmfby.pdf"

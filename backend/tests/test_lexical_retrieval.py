@@ -1,5 +1,5 @@
 from app.db.database import SessionLocal
-from app.services.lexical_retrieval_service import retrieve_lexical_chunks
+from app.services.retrieval.lexical import retrieve_lexical_chunks
 
 
 db = SessionLocal()

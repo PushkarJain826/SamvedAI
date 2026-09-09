@@ -302,30 +302,3 @@ def create_chunks(
     save_current_chunk()
 
     return chunks
-
-
-if __name__ == "__main__":
-    from app.services.pdf_service import extract_pdf_pages
-    from app.services.text_cleaner import clean_pages
-
-    pdf_path = "data/pmfby.pdf"
-
-    pages = extract_pdf_pages(pdf_path)
-    pages = clean_pages(pages)
-
-    blocks = pages_to_blocks(pages)
-
-    chunks = create_chunks(
-        blocks,
-        scheme="PMFBY",
-    )
-
-    print("Total chunks:", len(chunks))
-
-    for chunk in chunks:
-        print("\n" + "=" * 80)
-        print("CHUNK:", chunk["chunk_index"])
-        print("PAGES:", chunk["page_start"], "-", chunk["page_end"])
-        print("SECTION:", chunk["section"])
-        print("SUBSECTION:", chunk["subsection"])
-        print(chunk["chunk_text"])
