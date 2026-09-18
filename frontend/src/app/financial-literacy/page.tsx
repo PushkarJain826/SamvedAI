@@ -56,7 +56,7 @@ export default function FinancialLiteracyPage() {
           return (
             <article
               key={topic.id}
-              className="border border-border rounded-lg bg-surface overflow-hidden"
+              className="border border-border/80 rounded-2xl bg-surface overflow-hidden shadow-xs hover:shadow-md transition-shadow"
             >
               <button
                 onClick={() => setExpandedId(isExpanded ? null : topic.id)}
@@ -98,44 +98,44 @@ export default function FinancialLiteracyPage() {
           <h2 className="text-xl font-bold text-text">{t(language, 'emiCalculator')}</h2>
         </div>
 
-        <div className="bg-surface border border-border rounded-lg p-5">
+        <div className="bg-surface border border-border/80 rounded-2xl p-6 shadow-xs">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-text mb-1">
+              <label className="block text-sm font-medium text-text mb-1.5">
                 {t(language, 'loanAmount')}
               </label>
               <input
                 type="number"
                 value={loanAmount}
                 onChange={(e) => setLoanAmount(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-bg border border-border rounded-md text-text focus:outline-none focus:border-accent"
+                className="w-full px-3.5 py-2.5 text-sm bg-bg border border-border rounded-xl text-text focus:outline-none focus:border-accent"
                 min="0"
                 aria-label={t(language, 'loanAmount')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text mb-1">
+              <label className="block text-sm font-medium text-text mb-1.5">
                 {t(language, 'interestRate')}
               </label>
               <input
                 type="number"
                 value={interestRate}
                 onChange={(e) => setInterestRate(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-bg border border-border rounded-md text-text focus:outline-none focus:border-accent"
+                className="w-full px-3.5 py-2.5 text-sm bg-bg border border-border rounded-xl text-text focus:outline-none focus:border-accent"
                 min="0"
                 step="0.1"
                 aria-label={t(language, 'interestRate')}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text mb-1">
+              <label className="block text-sm font-medium text-text mb-1.5">
                 {t(language, 'tenure')} ({t(language, 'months')})
               </label>
               <input
                 type="number"
                 value={tenure}
                 onChange={(e) => setTenure(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-bg border border-border rounded-md text-text focus:outline-none focus:border-accent"
+                className="w-full px-3.5 py-2.5 text-sm bg-bg border border-border rounded-xl text-text focus:outline-none focus:border-accent"
                 min="1"
                 aria-label={t(language, 'tenure')}
               />
@@ -144,22 +144,22 @@ export default function FinancialLiteracyPage() {
 
           <button
             onClick={handleCalculate}
-            className="mt-4 px-6 py-2.5 bg-accent text-white text-sm font-medium rounded-md hover:bg-accent-dark transition-colors"
+            className="mt-5 px-6 py-2.5 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark transition-all shadow-sm shadow-accent/20 hover:scale-[1.02]"
           >
             {t(language, 'calculate')}
           </button>
 
           {emiResult && (
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 bg-bg rounded-lg text-center">
+              <div className="p-4 bg-[#FEFAF3] border border-[#E8DFC9] rounded-2xl text-center shadow-xs">
                 <p className="text-xs text-text-secondary">{t(language, 'monthlyEmi')}</p>
                 <p className="text-xl font-bold text-accent mt-1">{formatCurrency(emiResult.emi)}</p>
               </div>
-              <div className="p-4 bg-bg rounded-lg text-center">
+              <div className="p-4 bg-[#FEFAF3] border border-[#E8DFC9] rounded-2xl text-center shadow-xs">
                 <p className="text-xs text-text-secondary">{t(language, 'totalPayment')}</p>
                 <p className="text-lg font-semibold text-text mt-1">{formatCurrency(emiResult.totalPayment)}</p>
               </div>
-              <div className="p-4 bg-bg rounded-lg text-center">
+              <div className="p-4 bg-[#FEFAF3] border border-[#E8DFC9] rounded-2xl text-center shadow-xs">
                 <p className="text-xs text-text-secondary">{t(language, 'totalInterest')}</p>
                 <p className="text-lg font-semibold text-text mt-1">{formatCurrency(emiResult.totalInterest)}</p>
               </div>

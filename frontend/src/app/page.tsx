@@ -7,12 +7,17 @@ import {
   Languages,
   ShieldCheck,
   ArrowRight,
+  ChevronRight,
   Landmark,
   Wheat,
   BookOpen,
   Shield,
   PiggyBank,
   AlertCircle,
+  LayoutGrid,
+  Sprout,
+  Users,
+  Leaf,
 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { t } from '@/lib/i18n';
@@ -38,96 +43,226 @@ export default function HomePage() {
   const { language } = useApp();
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text leading-tight tracking-tight max-w-3xl">
-          {t(language, 'heroTitle')}
-        </h1>
-        <p className="mt-6 text-lg text-text-secondary leading-relaxed max-w-2xl">
-          {t(language, 'heroDescription')}
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
-          <Link
-            href="/assistant"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white font-medium rounded-md hover:bg-accent-dark transition-colors text-sm"
-          >
-            <MessageCircle className="w-4 h-4" />
-            {t(language, 'askSamvedai')}
-          </Link>
-          <Link
-            href="#services"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-border text-text font-medium rounded-md hover:bg-secondary transition-colors text-sm"
-          >
-            {t(language, 'exploreServices')}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+    <div className="overflow-x-hidden">
+      {/* ── Hero Section ─────────────────────── */}
+      <section className="relative bg-[#FEFAF3] pt-10 pb-12 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
+        {/* Subtle decorative foliage in background */}
+        <div className="absolute top-12 left-2 text-[#2E7D32]/10 pointer-events-none hidden md:block">
+          <Leaf className="w-16 h-16 transform -rotate-45" />
+        </div>
+        <div className="absolute top-24 right-4 text-[#2E7D32]/10 pointer-events-none hidden md:block">
+          <Leaf className="w-20 h-20 transform rotate-45" />
         </div>
 
-        {/* Voice indicator */}
-        <div className="mt-6 flex items-center gap-2 text-sm text-text-secondary">
-          <Mic className="w-4 h-4 text-accent" />
-          <span>{t(language, 'voiceDesc')}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-5">
+              {/* Badge */}
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#E8F3E4] text-[#2E7D32] border border-[#C8E6C9] shadow-xs">
+                  <Sprout className="w-3.5 h-3.5 text-[#2E7D32]" />
+                  <span>Empowering Rural India</span>
+                </span>
+              </div>
+
+              {/* Title with Terracotta Accent */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-text leading-[1.18] tracking-tight">
+                {language === 'en' ? (
+                  <>
+                    Government information,<br />
+                    <span className="text-[#C65D2E]">made simple</span> for everyone.
+                  </>
+                ) : (
+                  t(language, 'heroTitle')
+                )}
+              </h1>
+
+              {/* Description */}
+              <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl">
+                {t(language, 'heroDescription')}
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Link
+                  href="/assistant"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-dark transition-all text-sm shadow-md shadow-accent/20 hover:scale-[1.02]"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>{t(language, 'askSamvedai')}</span>
+                  <ChevronRight className="w-4 h-4 ml-0.5" />
+                </Link>
+                <Link
+                  href="#services"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F8F1E4] hover:bg-[#EFE5D3] text-text font-medium rounded-full border border-[#E5DAC0] transition-colors text-sm shadow-xs"
+                >
+                  <LayoutGrid className="w-4 h-4 text-accent" />
+                  <span>{t(language, 'exploreServices')}</span>
+                </Link>
+              </div>
+
+              {/* Voice Indicator */}
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-text-secondary pt-1">
+                <Mic className="w-4 h-4 text-[#C65D2E] shrink-0" />
+                <span>
+                  {language === 'en'
+                    ? 'Speak your question naturally. Ideal for those more comfortable with spoken language.'
+                    : t(language, 'voiceDesc')}
+                </span>
+              </div>
+            </div>
+
+            {/* Right Visual Column (Farmer with callouts) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center pt-6 lg:pt-0">
+              {/* Warm organic backdrop shape */}
+              <div className="absolute inset-0 bg-[#F4B942]/15 rounded-[40px] transform rotate-2 scale-105 filter blur-xs" />
+              <div className="absolute -inset-2 bg-[#E8F3E4]/40 rounded-[48px] transform -rotate-1" />
+
+              {/* Top callout: Viksit Gaon Viksit Bharat */}
+              <div className="absolute -top-3 right-4 sm:-right-2 z-20 text-[#C65D2E] font-serif italic text-base sm:text-lg font-bold select-none drop-shadow-sm text-right leading-tight transform rotate-2">
+                Viksit Gaon<br />
+                <span className="text-[#B55225]">Viksit Bharat</span>
+              </div>
+
+              {/* Farmer Image */}
+              <img
+                src="/images/farmer-hero.jpg"
+                alt="Indian Farmer in field"
+                className="w-full max-w-sm sm:max-w-md rounded-3xl object-cover shadow-xl border-4 border-white/95 relative z-10 aspect-4/3"
+              />
+
+              {/* Bottom floating badge: Sahi Jaankari Behtar Kal */}
+              <div className="absolute -bottom-4 right-2 sm:right-6 z-20 bg-[#E8F3E4] border border-[#C8E6C9] rounded-2xl px-4 py-2.5 shadow-lg flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-full bg-[#2E7D32] text-white flex items-center justify-center shrink-0">
+                  <Sprout className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-[#1B5E20] leading-none">Sahi Jaankari</p>
+                  <p className="text-[11px] text-[#2E7D32] font-semibold mt-0.5">Behtar Kal</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Soft Organic Wave Separator */}
+        <div className="w-full overflow-hidden leading-none mt-10">
+          <svg
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+            className="relative block w-full h-12 text-[#FFFFFF]"
+            fill="currentColor"
+          >
+            <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" />
+          </svg>
         </div>
       </section>
 
-      {/* ── Capabilities ─────────────────────── */}
-      <section className="bg-surface border-y border-border">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
-            <div>
-              <Languages className="w-6 h-6 text-accent mb-3" />
-              <h3 className="font-semibold text-text">{t(language, 'multilingualTitle')}</h3>
-              <p className="text-sm text-text-secondary mt-2 leading-relaxed">
-                {t(language, 'multilingualDesc')}
-              </p>
+      {/* ── Capabilities (4 Pill Cards) ─────── */}
+      <section className="bg-surface py-8 sm:py-12 border-b border-border/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {/* Card 1: Multilingual */}
+            <div className="bg-[#FEFAF3] border border-border/80 rounded-2xl p-5 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#E8F3E4] text-[#2E7D32] flex items-center justify-center shrink-0">
+                <Languages className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-text text-sm sm:text-base">{t(language, 'multilingualTitle')}</h3>
+                <p className="text-xs sm:text-sm text-text-secondary mt-1 leading-relaxed">
+                  {t(language, 'multilingualDesc')}
+                </p>
+              </div>
             </div>
-            <div>
-              <Mic className="w-6 h-6 text-accent mb-3" />
-              <h3 className="font-semibold text-text">{t(language, 'voiceTitle')}</h3>
-              <p className="text-sm text-text-secondary mt-2 leading-relaxed">
-                {t(language, 'voiceDesc')}
-              </p>
+
+            {/* Card 2: Voice Enabled */}
+            <div className="bg-[#FEFAF3] border border-border/80 rounded-2xl p-5 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#FFF3E0] text-[#D96B27] flex items-center justify-center shrink-0">
+                <Mic className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-text text-sm sm:text-base">{t(language, 'voiceTitle')}</h3>
+                <p className="text-xs sm:text-sm text-text-secondary mt-1 leading-relaxed">
+                  {t(language, 'voiceDesc')}
+                </p>
+              </div>
             </div>
-            <div>
-              <ShieldCheck className="w-6 h-6 text-accent mb-3" />
-              <h3 className="font-semibold text-text">{t(language, 'trustedTitle')}</h3>
-              <p className="text-sm text-text-secondary mt-2 leading-relaxed">
-                {t(language, 'trustedDesc')}
-              </p>
+
+            {/* Card 3: Trusted Sources */}
+            <div className="bg-[#FEFAF3] border border-border/80 rounded-2xl p-5 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#E1F5FE] text-[#0277BD] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-text text-sm sm:text-base">{t(language, 'trustedTitle')}</h3>
+                <p className="text-xs sm:text-sm text-text-secondary mt-1 leading-relaxed">
+                  {t(language, 'trustedDesc')}
+                </p>
+              </div>
             </div>
+
+            {/* Card 4: For Everyone */}
+            <div className="bg-[#FEFAF3] border border-border/80 rounded-2xl p-5 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#FCE4EC] text-[#C2185B] flex items-center justify-center shrink-0">
+                <Users className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-text text-sm sm:text-base">For Everyone</h3>
+                <p className="text-xs sm:text-sm text-text-secondary mt-1 leading-relaxed">
+                  Built for farmers, cooperative members and rural citizens.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Together for stronger communities divider */}
+          <div className="flex items-center justify-center gap-3 pt-10 text-xs text-text-secondary">
+            <div className="h-px w-16 sm:w-32 bg-border" />
+            <span className="flex items-center gap-1.5 font-medium text-text-secondary/80">
+              <Sprout className="w-3.5 h-3.5 text-accent" />
+              Together for stronger communities
+            </span>
+            <div className="h-px w-16 sm:w-32 bg-border" />
           </div>
         </div>
       </section>
 
       {/* ── Services — editorial numbered list ── */}
-      <section id="services" className="max-w-4xl mx-auto px-4 sm:px-6 py-20">
-        <div className="space-y-0">
-          {SERVICES.map((service, i) => {
+      <section id="services" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <div className="mb-8">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent">Key Areas</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-text mt-1">Explore Services</h2>
+        </div>
+
+        <div className="space-y-3">
+          {SERVICES.map((service) => {
             const Icon = service.icon;
             return (
               <Link
                 key={service.num}
                 href={service.href}
-                className="group flex items-start gap-5 py-6 border-b border-border hover:bg-surface/50 transition-colors -mx-4 px-4 rounded-md"
+                className="group flex items-start gap-5 p-5 bg-surface border border-border/80 hover:border-accent/40 rounded-2xl shadow-xs hover:shadow-md transition-all"
               >
-                <span className="text-3xl font-light text-border group-hover:text-accent transition-colors tabular-nums leading-none pt-1">
+                <span className="text-2xl sm:text-3xl font-light text-border group-hover:text-accent transition-colors tabular-nums leading-none pt-1">
                   {service.num}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <Icon className="w-4 h-4 text-text-secondary group-hover:text-accent transition-colors" />
-                    <h3 className="font-semibold text-text group-hover:text-accent transition-colors">
+                    <div className="w-7 h-7 rounded-full bg-secondary text-text-secondary group-hover:bg-accent/10 group-hover:text-accent flex items-center justify-center transition-colors">
+                      <Icon className="w-3.5 h-3.5" />
+                    </div>
+                    <h3 className="font-semibold text-text group-hover:text-accent transition-colors text-base sm:text-lg">
                       {t(language, service.key)}
                     </h3>
                   </div>
-                  <p className="text-sm text-text-secondary mt-1 leading-relaxed">
+                  <p className="text-sm text-text-secondary mt-1.5 leading-relaxed">
                     {t(language, service.descKey)}
                   </p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-border group-hover:text-accent transition-colors mt-1 shrink-0" />
+                <div className="w-8 h-8 rounded-full bg-secondary group-hover:bg-accent group-hover:text-white flex items-center justify-center text-text-secondary transition-colors shrink-0 mt-1">
+                  <ArrowRight className="w-4 h-4" />
+                </div>
               </Link>
             );
           })}
@@ -135,32 +270,29 @@ export default function HomePage() {
       </section>
 
       {/* ── How It Works ─────────────────────── */}
-      <section className="bg-surface border-y border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-20">
-          <h2 className="text-2xl font-bold text-text mb-12">
-            {t(language, 'howItWorks')}
-          </h2>
+      <section className="bg-surface border-y border-border py-16 sm:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-accent">Simple Process</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-text mt-1">
+              {t(language, 'howItWorks')}
+            </h2>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 sm:gap-4">
             {STEPS.map((step, i) => (
-              <div key={step.key} className="relative">
-                <div className="flex sm:flex-col items-start gap-3 sm:gap-0">
-                  <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold shrink-0">
-                    {i + 1}
-                  </div>
-                  <div className="sm:mt-3">
-                    <h3 className="font-semibold text-text text-sm">
-                      {t(language, step.key)}
-                    </h3>
-                    <p className="text-xs text-text-secondary mt-1 leading-relaxed">
-                      {t(language, step.desc)}
-                    </p>
-                  </div>
+              <div key={step.key} className="relative bg-[#FEFAF3] border border-border/70 rounded-2xl p-4 sm:p-5 shadow-xs flex sm:flex-col items-start gap-3 sm:gap-0">
+                <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-xs">
+                  {i + 1}
                 </div>
-                {/* Connector line on desktop */}
-                {i < STEPS.length - 1 && (
-                  <div className="hidden sm:block absolute top-4 left-[calc(100%_-_8px)] w-[calc(100%_-_24px)] h-px bg-border" />
-                )}
+                <div className="sm:mt-3">
+                  <h3 className="font-semibold text-text text-sm">
+                    {t(language, step.key)}
+                  </h3>
+                  <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                    {t(language, step.desc)}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -168,18 +300,25 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA ──────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-20 text-center">
-        <h2 className="text-2xl font-bold text-text">
-          {t(language, 'tagline')}
-        </h2>
-        <div className="mt-6">
-          <Link
-            href="/assistant"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-accent text-white font-medium rounded-md hover:bg-accent-dark transition-colors text-sm"
-          >
-            <MessageCircle className="w-4 h-4" />
-            {t(language, 'askSamvedai')}
-          </Link>
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center">
+        <div className="bg-[#FEFAF3] border border-[#E8DFC9] rounded-3xl p-8 sm:p-12 shadow-xs relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-8 text-[#2E7D32]/5 pointer-events-none">
+            <Leaf className="w-32 h-32 transform rotate-12" />
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-bold text-text max-w-2xl mx-auto leading-snug">
+            {t(language, 'tagline')}
+          </h2>
+          <div className="mt-6 flex justify-center">
+            <Link
+              href="/assistant"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-semibold rounded-full hover:bg-accent-dark transition-all text-sm shadow-md shadow-accent/20 hover:scale-[1.02]"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>{t(language, 'askSamvedai')}</span>
+              <ChevronRight className="w-4 h-4 ml-0.5" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>

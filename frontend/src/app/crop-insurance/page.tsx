@@ -90,7 +90,7 @@ export default function CropInsurancePage() {
         <h2 className="text-xl font-bold text-text mb-4">
           {language === 'en' ? 'What is PMFBY?' : language === 'hi' ? 'PMFBY क्या है?' : 'PMFBY म्हणजे काय?'}
         </h2>
-        <div className="bg-surface border border-border rounded-lg p-5">
+        <div className="bg-surface border border-border/80 rounded-2xl p-6 shadow-xs">
           <p className="text-sm text-text leading-relaxed">
             {language === 'en'
               ? 'The Pradhan Mantri Fasal Bima Yojana (PMFBY) is a comprehensive crop insurance scheme launched by the Government of India. It covers losses due to natural calamities, pests, and diseases from pre-sowing to post-harvest. The scheme ensures financial support to farmers suffering crop loss at very low premium rates.'
@@ -107,7 +107,7 @@ export default function CropInsurancePage() {
           {language === 'en' ? 'Farmer Premium Rates' : language === 'hi' ? 'किसान प्रीमियम दर' : 'शेतकरी प्रीमियम दर'}
         </h2>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border border-border rounded-lg overflow-hidden">
+          <table className="w-full text-sm border border-border/80 rounded-2xl overflow-hidden shadow-xs">
             <thead>
               <tr className="bg-secondary">
                 <th className="text-left px-4 py-3 font-semibold text-text">

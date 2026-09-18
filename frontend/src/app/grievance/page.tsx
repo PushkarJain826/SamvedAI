@@ -135,7 +135,7 @@ export default function GrievancePage() {
       </div>
 
       {/* Step content */}
-      <div className="bg-surface border border-border rounded-lg p-5 sm:p-6 min-h-[300px]">
+      <div className="bg-surface border border-border/80 rounded-2xl p-6 sm:p-7 min-h-[300px] shadow-xs">
         {/* Step 1: Describe */}
         {STEPS[currentStep] === 'describe' && (
           <div>
@@ -285,7 +285,7 @@ export default function GrievancePage() {
           onClick={handlePrevious}
           disabled={currentStep === 0}
           className={cn(
-            'flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors',
+            'flex items-center gap-1 px-5 py-2.5 text-sm font-medium rounded-full transition-colors',
             currentStep === 0
               ? 'text-border cursor-not-allowed'
               : 'text-text-secondary hover:text-text hover:bg-secondary'
@@ -299,7 +299,7 @@ export default function GrievancePage() {
           <button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="flex items-center gap-1 px-6 py-2 text-sm font-medium bg-accent text-white rounded-md hover:bg-accent-dark transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-6 py-2.5 text-sm font-semibold bg-accent text-white rounded-full hover:bg-accent-dark transition-all shadow-sm shadow-accent/20 disabled:opacity-50"
           >
             {isSubmitting
               ? (language === 'en' ? 'Processing…' : language === 'hi' ? 'प्रोसेसिंग…' : 'प्रक्रिया सुरू…')
@@ -311,9 +311,9 @@ export default function GrievancePage() {
               onClick={handleNext}
               disabled={!canProceed() || currentStep >= STEPS.length - 1}
               className={cn(
-                'flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors',
+                'flex items-center gap-1.5 px-6 py-2.5 text-sm font-semibold rounded-full transition-all shadow-xs',
                 canProceed() && currentStep < STEPS.length - 1
-                  ? 'bg-accent text-white hover:bg-accent-dark'
+                  ? 'bg-accent text-white hover:bg-accent-dark shadow-sm shadow-accent/20 hover:scale-[1.02]'
                   : 'bg-secondary text-border cursor-not-allowed'
               )}
             >

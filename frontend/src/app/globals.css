@@ -4,15 +4,22 @@
 /* ── Theme tokens ────────────────────────── */
 
 @theme {
-  --color-bg: #F7F8F7;
+  --color-bg: #FEFAF3;
   --color-surface: #FFFFFF;
-  --color-secondary: #F1F5F7;
-  --color-text: #18232D;
-  --color-text-secondary: #5F6B73;
-  --color-border: #DCE3E7;
-  --color-accent: #527A9B;
-  --color-accent-dark: #365B78;
-  --color-accent-light: #E5EEF4;
+  --color-secondary: #F8F1E4;
+  --color-text: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --color-accent: #2E7D32;
+  --color-accent-dark: #1B5E20;
+  --color-accent-light: #E8F3E4;
+  --color-accent-warm: #F4B942;
+  --color-accent-terracotta: #C65D2E;
+  --color-soft-beige: #F8F1E4;
+  --color-light-green: #E8F3E4;
+  --color-success: #4CAF50;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
 
   --font-sans: 'DM Sans', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
 }
@@ -57,13 +64,13 @@ html.reduce-motion *::after {
 /* ── High contrast ────────────────────────── */
 
 html.high-contrast {
-  --color-bg: #EDF2F5;
+  --color-bg: #F8F1E4;
   --color-surface: #FFFFFF;
-  --color-secondary: #E5EEF4;
+  --color-secondary: #E8F3E4;
   --color-text: #000000;
-  --color-text-secondary: #2A3640;
-  --color-border: #8A9BA5;
-  --color-accent: #3A5F7A;
+  --color-text-secondary: #1F2937;
+  --color-border: #1B5E20;
+  --color-accent: #1B5E20;
 }
 
 /* ── Focus ────────────────────────────────── */
@@ -93,7 +100,7 @@ html.high-contrast {
 
 ::selection {
   background-color: var(--color-accent-light);
-  color: white;
+  color: var(--color-accent-dark);
 }
 
 /* ── Loading dots animation ──────────────── */

@@ -59,7 +59,7 @@ export default function CooperativeLawsPage() {
             return (
               <article
                 key={topic.id}
-                className="border border-border rounded-lg bg-surface overflow-hidden"
+                className="border border-border/80 rounded-2xl bg-surface overflow-hidden shadow-xs hover:shadow-md transition-shadow"
               >
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : topic.id)}

@@ -50,7 +50,7 @@ export default function PacsPage() {
       </div>
 
       {/* What is a PACS */}
-      <section className="mt-8 bg-surface border border-border rounded-lg p-5">
+      <section className="mt-8 bg-surface border border-border/80 rounded-2xl p-6 shadow-xs">
         <h2 className="font-semibold text-text mb-2">
           {language === 'en' ? 'What is a PACS?' : language === 'hi' ? 'PACS क्या है?' : 'PACS म्हणजे काय?'}
         </h2>
@@ -72,7 +72,7 @@ export default function PacsPage() {
             return (
               <article
                 key={svc.id}
-                className="border border-border rounded-lg bg-surface overflow-hidden"
+                className="border border-border/80 rounded-2xl bg-surface overflow-hidden shadow-xs hover:shadow-md transition-shadow"
               >
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : svc.id)}

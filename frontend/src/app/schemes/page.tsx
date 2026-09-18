@@ -64,20 +64,20 @@ export default function SchemesPage() {
       {/* Search + Filter */}
       <div className="mt-8 flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <input
             type="text"
             placeholder={t(language, 'searchSchemes')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 text-sm bg-surface border border-border rounded-lg text-text placeholder:text-text-secondary/60 focus:outline-none focus:border-accent"
+            className="w-full pl-10 pr-4 py-2.5 text-sm bg-surface border border-border rounded-full text-text placeholder:text-text-secondary/60 focus:outline-none focus:border-accent shadow-xs"
             aria-label={t(language, 'search')}
           />
         </div>
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value as SchemeCategory | '')}
-          className="text-sm bg-surface border border-border rounded-lg px-3 py-2.5 text-text cursor-pointer focus:outline-none focus:border-accent"
+          className="text-sm bg-surface border border-border rounded-full px-4 py-2.5 text-text cursor-pointer focus:outline-none focus:border-accent shadow-xs font-medium"
           aria-label="Filter by category"
         >
           {CATEGORIES.map((cat) => (
@@ -98,7 +98,7 @@ export default function SchemesPage() {
             return (
               <article
                 key={scheme.id}
-                className="border border-border rounded-lg bg-surface overflow-hidden"
+                className="border border-border/80 rounded-2xl bg-surface overflow-hidden shadow-xs hover:shadow-md transition-shadow"
               >
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : scheme.id)}
@@ -113,7 +113,7 @@ export default function SchemesPage() {
                       {getDescription(scheme)}
                     </p>
                     <div className="flex items-center gap-3 mt-2">
-                      <span className="text-xs px-2 py-0.5 rounded bg-secondary text-text-secondary capitalize">
+                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-secondary text-text-secondary capitalize font-medium">
                         {scheme.category}
                       </span>
                       <span className="text-xs text-text-secondary">{scheme.ministry}</span>

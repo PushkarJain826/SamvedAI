@@ -197,7 +197,7 @@ export default function AssistantPage() {
                   <button
                     key={suggestion}
                     onClick={() => handleSend(suggestion)}
-                    className="text-sm px-3 py-2 border border-border rounded-md text-text-secondary hover:text-text hover:border-accent hover:bg-surface transition-colors text-left"
+                    className="text-xs sm:text-sm px-4 py-2 border border-border/80 rounded-full bg-surface text-text-secondary hover:text-text hover:border-accent hover:bg-secondary/70 transition-all text-left shadow-xs"
                   >
                     {suggestion}
                   </button>
@@ -405,7 +405,7 @@ export default function AssistantPage() {
                   onKeyDown={handleKeyDown}
                   placeholder={t(language, 'typeMessage')}
                   rows={1}
-                  className="w-full resize-none bg-bg border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text-secondary/60 focus:outline-none focus:border-accent transition-colors"
+                  className="w-full resize-none bg-bg border border-border/80 rounded-2xl px-4 py-3 text-sm text-text placeholder:text-text-secondary/60 focus:outline-none focus:border-accent transition-colors shadow-xs"
                   aria-label={t(language, 'typeMessage')}
                   disabled={isLoading}
                 />
@@ -415,7 +415,7 @@ export default function AssistantPage() {
               <button
                 onClick={toggleListening}
                 className={cn(
-                  'p-2.5 rounded-lg transition-colors shrink-0',
+                  'p-3 rounded-full transition-all shrink-0 shadow-xs',
                   isListening
                     ? 'bg-accent text-white'
                     : 'bg-bg border border-border text-text-secondary hover:text-text hover:border-accent'
@@ -430,9 +430,9 @@ export default function AssistantPage() {
                 onClick={() => handleSend()}
                 disabled={!inputValue.trim() || isLoading}
                 className={cn(
-                  'p-2.5 rounded-lg transition-colors shrink-0',
+                  'p-3 rounded-full transition-all shrink-0 shadow-xs',
                   inputValue.trim() && !isLoading
-                    ? 'bg-accent text-white hover:bg-accent-dark'
+                    ? 'bg-accent text-white hover:bg-accent-dark shadow-sm shadow-accent/20'
                     : 'bg-bg border border-border text-border cursor-not-allowed'
                 )}
                 aria-label="Send message"
